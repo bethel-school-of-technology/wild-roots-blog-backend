@@ -27,6 +27,6 @@ var Customer = new Schema({
 });
 
 // Compile model from schema
-var CustomerModel = mongoose.model('Customer', Customer );
+var CustomerModel = mongoose.model('Customers', Customer );
 
 module.exports = CustomerModel;

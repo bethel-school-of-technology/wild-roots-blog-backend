@@ -26,7 +26,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-// in production never have cors set up in this way. 
+// in production never have this set up for cors
 app.use(cors());
 app.use(bodyParser.json());
 
