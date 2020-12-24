@@ -7,11 +7,10 @@ const creds = require('./config');
 import transporter from transporter;
 
 var transport = {
-  host: 'smtp.example.com',
+  host: 'localhost',
   port: 1025,
   auth: {
     user: creds.USER,
-    pass: creds.PASS
   }
 },
 var transporter = nodemailer.createTransport(transport)
@@ -31,7 +30,7 @@ router.post('/send', (req, res, next) => {
   var content = `name: ${name} \n email: ${email} \n message: ${message} `
   var mail = {
     from: name,
-    to:'RECEIVING_EMAIL_ADDRESS_GOES_HERE',  // Change email address 
+    to:'receiving email address',  // Change email address 
     subject: 'New Message from Contact Form',
     text: content
   }
