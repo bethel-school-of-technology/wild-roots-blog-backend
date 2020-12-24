@@ -19,8 +19,13 @@ mongoose.connect('mongodb+srv://Exodus-Cyber:Password1@cluster0.ol4ue.mongodb.ne
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var customerRouter = require('./routes/customers');
+<<<<<<< HEAD
 var cookingRouter = require('./routes/cooking');
 var gardeningRouter = require('./routes/gardening');
+=======
+var blogRouter = require('./routes/blog');
+var contactRouter = require('./routes/contact');
+>>>>>>> sonya-contact-mailhog
 
 var app = express();
 
@@ -37,12 +42,18 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
 app.use(bodyParser.json());
 
+app.use('/', routes);
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
 app.use('/customers', customerRouter);
+<<<<<<< HEAD
 app.use('/gardening', gardeningRouter);
 app.use('/cooking', cookingRouter);
+=======
+app.use('/blog', blogRouter);
+app.use('/contact', contactRouter);
+>>>>>>> sonya-contact-mailhog
 
 // catch 404 and forward to error handler
   app.use(function(req, res, next) {
