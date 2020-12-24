@@ -1,4 +1,3 @@
-var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
@@ -6,6 +5,7 @@ var logger = require('morgan');
 var cors = require('cors');
 var bodyParser = require('body-parser');
 
+//MongoDB connection strings
 
 //const mongoose = require('mongoose');
 //mongoose.connect('mongodb+srv://iledesma:thirteen13@cluster0.csatm.mongodb.net/<dbname>?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true});
@@ -15,14 +15,14 @@ mongoose.connect('mongodb+srv://Exodus-Cyber:Password1@cluster0.ol4ue.mongodb.ne
 
 
 
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var customerRouter = require('./routes/customers');
-var blogRouter = require('./routes.blog');
+var cookingRouter = require('./routes/cooking');
+var gardeningRouter = require('./routes/gardening');
 
 var app = express();
-
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -41,12 +41,13 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
 app.use('/customers', customerRouter);
-app.use('/blog', blogRouter);
+app.use('/gardening', gardeningRouter);
+app.use('/cooking', cookingRouter);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+  app.use(function(req, res, next) {
   next(createError(404));
-});
+}); 
 
 // error handler
 app.use(function(err, req, res, next) {
