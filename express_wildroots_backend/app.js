@@ -13,9 +13,6 @@ var bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 mongoose.connect('mongodb+srv://Exodus-Cyber:Password1@cluster0.ol4ue.mongodb.net/Wild-roots-blog?retryWrites=true&w=majority', {useNewUrlParser: true});
 
-
-
-
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var customerRouter = require('./routes/customers');
@@ -38,7 +35,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
 app.use(bodyParser.json());
 
-app.use('/', routes);
+// app.use('/', routes);
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
