@@ -5,13 +5,15 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
 var bodyParser = require('body-parser');
+var passport = require('passport');
+var session = require('express-session');
 
-
-//const mongoose = require('mongoose');
-//mongoose.connect('mongodb+srv://iledesma:thirteen13@cluster0.csatm.mongodb.net/<dbname>?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true});
 
 const mongoose = require('mongoose');
-mongoose.connect('mongodb+srv://Exodus-Cyber:Password1@cluster0.ol4ue.mongodb.net/Wild-roots-blog?retryWrites=true&w=majority', {useNewUrlParser: true});
+mongoose.connect('mongodb+srv://iledesma:thirteen13@cluster0.csatm.mongodb.net/Wild-Roots-Blog?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true});
+
+//const mongoose = require('mongoose');
+//mongoose.connect('mongodb+srv://Exodus-Cyber:Password1@cluster0.ol4ue.mongodb.net/Wild-roots-blog?retryWrites=true&w=majority', {useNewUrlParser: true});
 
 
 
@@ -32,6 +34,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({ secret: 'perilous journey' }));
+app.use(passport.initialize());  
+app.use(passport.session());
+
 // in production never have cors set up in this way. 
 app.use(cors());
 app.use(bodyParser.json());
