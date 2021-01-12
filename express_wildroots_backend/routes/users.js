@@ -20,6 +20,7 @@ router.get('/', async function(req, res) {
   }
 });
 
+
 router.post('/add', async function (req, res) {
   try {
     const newUser = await User.create(req.body);
@@ -32,8 +33,7 @@ router.post('/add', async function (req, res) {
       status: 'fail',
       message: err
     });
-  }
-});
+
 
 
 router.post('/signup', function(req, res, next) {
