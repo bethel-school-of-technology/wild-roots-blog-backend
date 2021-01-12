@@ -36,27 +36,7 @@ router.post('/add', async function (req, res) {
 });
 
 
-router.post('/signup', function(req, res, next) {
-  models.users
-    .findOrCreate({
-      where: {
-        Username: req.body.username
-      },
-      defaults: {
-        FirstName: req.body.firstName,
-        LastName: req.body.lastName,
-        Email: req.body.email,
-        Password: req.body.password
-      }
-    })
-    .spread(function(result, created) {
-      if (created) {
-        res.redirect.json('login');
-      } else {
-        res.json('This user already exists');
-      }
-    });
-});
+
 
 
 module.exports = router;

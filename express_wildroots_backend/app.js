@@ -38,7 +38,7 @@ app.use(session({ secret: 'perilous journey' }));
 app.use(passport.initialize());  
 app.use(passport.session());
 
-// in production never have cors set up in this way. 
+// in production never have this set up for cors
 app.use(cors());
 app.use(bodyParser.json());
 
