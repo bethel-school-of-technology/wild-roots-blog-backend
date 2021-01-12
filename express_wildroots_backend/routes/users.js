@@ -59,43 +59,4 @@ router.post('/signup', function(req, res, next) {
 });
 
 
-
-router.get('/login', function(req, res, next) {
-  res.json('login');
-});
-
-router.post('/login', function(req, res, next) {
-  models.users
-    .findOne({
-      where: {
-        Username: req.body.username,
-        Password: req.body.password
-      }
-    })
-    .then(user => {
-      if (user) {
-        res.redirect.json('profile/' + user.UserId);
-      } else {
-        res.json('Invalid login!');
-      }
-    });
-});
-
-router.get('/profile/:id', function (req, res, next) {
-  models.users
-    .findByPk(parseInt(req.params.id))
-    .then(user => {
-      if (user) {
-        res.json('profile', {
-          FirstName: user.FirstName,
-          LastName: user.LastName,
-          Email: user.Email,
-          Username: user.Username
-        });
-      } else {
-        res.json('User not found');
-      }
-    });
-  });
-
 module.exports = router;
