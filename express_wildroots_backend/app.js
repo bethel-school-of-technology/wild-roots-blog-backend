@@ -9,11 +9,11 @@ var passport = require('passport');
 var session = require('express-session');
 
 
-const mongoose = require('mongoose');
-mongoose.connect('mongodb+srv://iledesma:thirteen13@cluster0.csatm.mongodb.net/Wild-Roots-Blog?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true});
-
 //const mongoose = require('mongoose');
-//mongoose.connect('mongodb+srv://Exodus-Cyber:Password1@cluster0.ol4ue.mongodb.net/Wild-roots-blog?retryWrites=true&w=majority', {useNewUrlParser: true});
+//mongoose.connect('mongodb+srv://iledesma:thirteen13@cluster0.csatm.mongodb.net/Wild-Roots-Blog?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true});
+
+const mongoose = require('mongoose');
+mongoose.connect('mongodb+srv://Exodus-Cyber:Password1@cluster0.ol4ue.mongodb.net/Wild-roots-blog?retryWrites=true&w=majority', {useNewUrlParser: true});
 
 
 
