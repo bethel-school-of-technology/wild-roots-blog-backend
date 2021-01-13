@@ -8,15 +8,13 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 
 dotenv.config();
+var passport = require('passport');
+var session = require('express-session');
 
 //MongoDB connection strings
 mongoose.connect(
   process.env.MONGO__ACCESS, { useNewUrlParser: true, useUnifiedTopology: true }, () => console.log("Database is  Connected"));
 
-//const mongoose = require('mongoose');
-// mongoose.connect('mongodb+srv://iledesma:thirteen13@cluster0.csatm.mongodb.net/<dbname>?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true});
-
-// 'mongodb+srv://Exodus-Cyber:Password1@cluster0.ol4ue.mongodb.net/Wild-roots-blog?retryWrites=true&w=majority', {useNewUrlParser: true}
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -36,7 +34,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(session({ secret: 'perilous journey' }));
+app.use(passport.initialize());  
+app.use(passport.session());
+
 // in production never have this set up for cors
+
 app.use(cors());
 app.use(bodyParser.json());
 
