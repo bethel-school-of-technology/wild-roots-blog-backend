@@ -3,8 +3,13 @@ var router = express.Router();
 var nodemailer = require('nodemailer');
 var cors = require('cors');
 const creds = require('./config');
+const Customer = require('../models/Contact');
+// const transporter = require("transporter")
 
-// const transporter = require("transporter");
+// router.get("/", async function(req, res){ 
+//   await 
+// })
+
 
 router.post('/send', async (req, res, next) => {
   var name = req.body.name
@@ -17,6 +22,10 @@ router.post('/send', async (req, res, next) => {
     subject: 'New Message from Contact Form',
     text: content
   }
+  const ContactUs = new Customer({ 
+    name, email, message
+  }); ContactUs.save(); 
+  
   var transport = {
     host: '127.0.0.1',
     port: 1025,
