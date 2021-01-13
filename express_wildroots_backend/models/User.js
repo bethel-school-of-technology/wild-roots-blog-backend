@@ -9,8 +9,9 @@ var Schema = mongoose.Schema;
 var User = new Schema({
   users: {
     username: String,
-    email: String,
-    password: String
+    email: { type: String, required: true, unique: true },
+    password: { type: String, unique: true, minLength: 5 },
+    passwordCheck: String
   }}, 
   
   {timestamps: true});
