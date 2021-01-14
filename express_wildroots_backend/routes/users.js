@@ -8,6 +8,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require('jsonwebtoken');
 var router = require('express').Router();
 const auth = require('../services/auth');
+const UserModel = require("../models/User");
 
 /* GET users listing. */
 router.get("/", async function (req, res) {
@@ -142,7 +143,15 @@ router.post('/tokenIsValid', async (req, res) => {
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
-})
+});
+
+router.get('/', auth, async (req, res) => {
+  const user = await User.findById(req.useer);
+  res.json({
+    username: user.username,
+    id: user._id,
+  });
+});
 
 
 module.exports = router;
