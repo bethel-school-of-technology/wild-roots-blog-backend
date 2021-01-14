@@ -2,9 +2,8 @@
   "name": "express-wildroots-backend",
   "version": "0.0.0",
   "private": true,
-  "proxy": "http://localhost:3000",
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "nodemon ./bin/www --watch"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
@@ -12,8 +11,10 @@
     "cors": "^2.8.5",
     "debug": "~2.6.9",
     "express": "^4.17.1",
+    "hbs": "^4.1.1",
     "mongoose": "^5.10.17",
-    "morgan": "~1.9.1"
+    "morgan": "~1.9.1",
+    "nodemailer": "^6.4.17"
   },
   "devDependencies": {
     "nodemon": "^2.0.6"

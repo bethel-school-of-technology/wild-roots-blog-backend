@@ -19,7 +19,7 @@ var customerRouter = require('./routes/customers');
 var cookingRouter = require('./routes/cooking');
 var gardeningRouter = require('./routes/gardening');
 var contactRouter = require('./routes/contact');
-
+var scriptureRouter = require('./routes/scriptures.js')
 var app = express();
 
 // view engine setup
@@ -43,7 +43,7 @@ app.use('/customers', customerRouter);
 app.use('/gardening', gardeningRouter);
 app.use('/cooking', cookingRouter);
 app.use('/contact', contactRouter);
-
+app.use('/scripture', scriptureRouter);
 // catch 404 and forward to error handler
   app.use(function(req, res, next) {
   next(createError(404));
