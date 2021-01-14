@@ -41,7 +41,8 @@ router.get("/:id", async function (req, res) {
 
 router.post("/register", async (req, res) => {
   try {
-    const { username, email, password, passwordCheck } = req.body;
+    
+    let { username, email, password, passwordCheck } = req.body;
 
     //validation
 
@@ -76,11 +77,11 @@ router.post("/register", async (req, res) => {
     res.json(savedUser);
 
   } catch (err) {
-    res.status(500).json(err);
+    res.status(500).json({ error: err.message });
   }
 });
 
-router.put("/update/:id", async function (req, res) {
+/*router.put("/update/:id", async function (req, res) {
   try {
     const user = await User.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
@@ -111,6 +112,6 @@ router.delete("/delete/:id", async function (req, res) {
       message: err,
     });
   }
-});
+}); */
 
 module.exports = router;
