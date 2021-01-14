@@ -23,7 +23,9 @@ mongoose.connect(
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var customerRouter = require('./routes/customers');
+var cookingRouter = require('./routes/cooking');
+var gardeningRouter = require('./routes/gardening');
+var contactRouter = require('./routes/contact');
 
 var app = express();
 
@@ -48,8 +50,10 @@ app.use(bodyParser.json());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/gardening', gardeningRouter);
+app.use('/cooking', cookingRouter);
+app.use('/contact', contactRouter);
 
-app.use('/customers', customerRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
