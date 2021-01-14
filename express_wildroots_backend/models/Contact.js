@@ -5,11 +5,11 @@ const { Schema } = mongoose;
 var ContactUs = mongoose.Schema;
 
 var Customer = new Schema({
-  customer: {
+  
     name: String,
     email: String,
     message: String
-  }
+  
   
 });
 
