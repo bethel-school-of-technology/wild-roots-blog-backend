@@ -5,6 +5,7 @@ var mongoose = require("mongoose");
 const User = require("../models/User");
 const { json } = require("body-parser");
 const bcrypt = require("bcryptjs");
+const jwt = require('jsonwebtoken');
 
 /* GET users listing. */
 router.get("/", async function (req, res) {
@@ -38,10 +39,8 @@ router.get("/:id", async function (req, res) {
   }
 });
 
-
 router.post("/register", async (req, res) => {
   try {
-    
     let { username, email, password, passwordCheck } = req.body;
 
     //validation
@@ -64,18 +63,53 @@ router.post("/register", async (req, res) => {
         .json({ msg: "An account with this email already exists." });
 
     if (!username) username = email;
-    
+
     const salt = await bcrypt.genSalt();
     const passwordHash = await bcrypt.hash(password, hash);
 
-    const newUser = new User ({
+    const newUser = new User({
       email,
       password: passwordHash,
-      username
+      username,
     });
     const savedUser = await newUser.save(); //saves new user to database.
     res.json(savedUser);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
 
+router.post("/login", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    //validate
+    if (!email || !password)
+      return res.status(400).json({ msg: "Not all fields have been entered." });
+    //validate password belongs to account with this email
+
+    const user = await User.findOne({ email: email });
+    if (!user)
+      return res
+        .status(400)
+        .json({ msg: "No account with this email has been registered." });
+
+    const isMatch = await bcrypt.compare(password, user.password); //user.password from const user which has the hashed password.
+    if (!isMatch)
+    return res
+    .status(400)
+    .json({ msg: "Invalid credentials." });
+    
+    const token = jwt.sign({id: user._id}, process.env.JWT_SECRET);
+    res.json({
+      token,
+      user: {
+        id: user._id,
+        username: user.username,
+        email: user.email
+      }
+    })
+  
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
