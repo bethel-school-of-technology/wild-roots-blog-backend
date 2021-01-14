@@ -4,8 +4,6 @@ const { Schema } = mongoose;
 
 
 // define Schema
-
-
 var Community = mongoose.Schema;
 
 var Community = new Schema({

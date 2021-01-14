@@ -5,15 +5,19 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
 var bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+const dotenv = require('dotenv');
+
+dotenv.config();
 var passport = require('passport');
 var session = require('express-session');
 
 
-//const mongoose = require('mongoose');
-//mongoose.connect('mongodb+srv://iledesma:thirteen13@cluster0.csatm.mongodb.net/Wild-Roots-Blog?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true});
+//MongoDB connection strings
+mongoose.connect(
+  process.env.MONGO__ACCESS, { useNewUrlParser: true, useUnifiedTopology: true }, () => console.log("Database is  Connected"));
 
-const mongoose = require('mongoose');
-mongoose.connect('mongodb+srv://Exodus-Cyber:Password1@cluster0.ol4ue.mongodb.net/Wild-roots-blog?retryWrites=true&w=majority', {useNewUrlParser: true});
+
 
 
 
@@ -57,6 +61,7 @@ app.use(function(err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
+  console.log(err)
 
   // render the error page
   res.status(err.status || 500);
