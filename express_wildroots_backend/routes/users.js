@@ -6,6 +6,9 @@ const User = require("../models/User");
 const { json } = require("body-parser");
 const bcrypt = require("bcryptjs");
 const jwt = require('jsonwebtoken');
+var router = require('express').Router();
+const auth = require('../services/auth');
+const UserModel = require("../models/User");
 
 /* GET users listing. */
 router.get("/", async function (req, res) {
@@ -115,37 +118,40 @@ router.post("/login", async (req, res) => {
   }
 });
 
-/*router.put("/update/:id", async function (req, res) {
-  try {
-    const user = await User.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-      runValidators: true,
-    });
+router.delete('/delete', auth, async (req, res) => {
+try {
+ const deletedUser = await User.findByIdAndDelete(req.user);
+ res.json(deletedUser);
+} catch (err) {
+  res.status(500).json({ error: err.message });
+}
+});
 
-    res.status(200).json({
-      data: { user },
-    });
+router.post('/tokenIsValid', async (req, res) => {
+  try {
+    const token = req.header('x-auth-token');
+    if (!token) return res.json(false);
+
+    const verified = jwt.verify(token, process.env.JWT_SECRET);
+    if (!verified) return res.json(false);
+
+    const user = await User.findById(verified.id);
+    if (!user) return res.json(false);
+
+    return res.json(true);
+
   } catch (err) {
-    res.status(500).json({
-      status: "fail",
-      message: err,
-    });
+    res.status(500).json({ error: err.message });
   }
 });
 
-router.delete("/delete/:id", async function (req, res) {
-  try {
-    await User.findByIdAndDelete(req.params.id);
-    res.status(200).json({
-      status: "success",
-      data: null,
-    });
-  } catch (err) {
-    res.status(404).json({
-      status: "fail",
-      message: err,
-    });
-  }
-}); */
+router.get('/', auth, async (req, res) => {
+  const user = await User.findById(req.useer);
+  res.json({
+    username: user.username,
+    id: user._id,
+  });
+});
+
 
 module.exports = router;

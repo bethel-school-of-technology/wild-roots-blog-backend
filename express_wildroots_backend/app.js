@@ -8,8 +8,10 @@ var bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 
+const app = express();
+
 dotenv.config();
-var passport = require('passport');
+
 var session = require('express-session');
 
 
@@ -27,7 +29,7 @@ var cookingRouter = require('./routes/cooking');
 var gardeningRouter = require('./routes/gardening');
 var contactRouter = require('./routes/contact');
 
-var app = express();
+
 
 
 
@@ -41,12 +43,15 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({ secret: 'perilous journey' }));
-app.use(passport.initialize());  
-app.use(passport.session());
+
 
 // in production never have this set up for cors
 app.use(cors());
 app.use(bodyParser.json());
+
+/* const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => console.log(`The server has started on port ${PORT}`)); */
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
