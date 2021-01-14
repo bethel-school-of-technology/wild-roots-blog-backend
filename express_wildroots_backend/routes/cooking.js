@@ -69,7 +69,7 @@ router.post('/addRecipe', async function (req, res, next) {
         }
         const newRecipie = await Cooking.create(itemToCreate);
 
-        res.status(201).json({
+        res.status(200).json({
                 recipie: newRecipie,
                 status: 'success',
         });
