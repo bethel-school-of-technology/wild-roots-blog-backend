@@ -15,6 +15,7 @@ dotenv.config();
 var session = require('express-session');
 
 
+
 //MongoDB connection strings
 mongoose.connect(
   process.env.MONGO__ACCESS, { useNewUrlParser: true, useUnifiedTopology: true }, () => console.log("Database is  Connected"));
@@ -28,6 +29,10 @@ var usersRouter = require('./routes/users');
 var cookingRouter = require('./routes/cooking');
 var gardeningRouter = require('./routes/gardening');
 var contactRouter = require('./routes/contact');
+var scriptureRouter = require('./routes/scriptures.js')
+var app = express();
+
+
 
 
 
@@ -61,7 +66,7 @@ app.use('/users', usersRouter);
 app.use('/gardening', gardeningRouter);
 app.use('/cooking', cookingRouter);
 app.use('/contact', contactRouter);
-
+app.use('/scripture', scriptureRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

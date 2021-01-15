@@ -4,7 +4,7 @@
   "private": true,
   "proxy": "http://localhost:3001",
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "nodemon ./bin/www --watch"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
