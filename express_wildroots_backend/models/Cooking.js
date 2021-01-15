@@ -3,25 +3,17 @@ var mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 // Define schema
-var Cooking = mongoose.Schema;
+// var Cooking = mongoose.Schema;
 
-var Cooking = new Schema({
-   guest: {
+var newRecipie = new Schema({
     firstName: String,
-    lastName: String,
+    email: String,
     recipieName: String,
     description: String
-  },
-  address: {
-    mailingOne: String, 
-    mailingTwo: String,
-    city: String,
-    state: String,
-    zip: Number
   }
-});
+);
 
 // Compile model from schema
-var CookingModel = mongoose.model('Cooking', Cooking );
+var CookingModel = mongoose.model('Recipies', newRecipie );
 
 module.exports = CookingModel;
