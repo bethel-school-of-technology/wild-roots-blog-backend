@@ -53,12 +53,14 @@ app.use(bodyParser.json());
 
 app.listen(PORT, () => console.log(`The server has started on port ${PORT}`)); */
 
+
+
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/gardening', gardeningRouter);
 app.use('/cooking', cookingRouter);
 app.use('/contact', contactRouter);
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -1,14 +1,11 @@
 var express = require("express");
 var router = express.Router();
-var models = require("../models");
 var mongoose = require("mongoose");
 const User = require("../models/User");
 const { json } = require("body-parser");
 const bcrypt = require("bcryptjs");
 const jwt = require('jsonwebtoken');
-var router = require('express').Router();
 const auth = require('../services/auth');
-const UserModel = require("../models/User");
 
 /* GET users listing. */
 router.get("/", async function (req, res) {
@@ -48,7 +45,7 @@ router.post("/register", async (req, res) => {
 
     //validation
 
-    if (!email || !password || passwordCheck)
+    if (!email || !password || !passwordCheck)
       return res.status(400).json({ msg: "Not all fields have been entered." });
     if (password.length < 5)
       return res
@@ -68,7 +65,7 @@ router.post("/register", async (req, res) => {
     if (!username) username = email;
 
     const salt = await bcrypt.genSalt();
-    const passwordHash = await bcrypt.hash(password, hash);
+    const passwordHash = await bcrypt.hash(password, salt);
 
     const newUser = new User({
       email,
