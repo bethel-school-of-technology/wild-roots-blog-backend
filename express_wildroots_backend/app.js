@@ -7,7 +7,6 @@ var cors = require('cors');
 var bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
-
 const app = express();
 
 dotenv.config();
@@ -17,6 +16,7 @@ var session = require('express-session');
 
 
 //MongoDB connection strings
+mongoose.set('useCreateIndex', true);
 mongoose.connect(
   process.env.MONGO__ACCESS, { useNewUrlParser: true, useUnifiedTopology: true }, () => console.log("Database is  Connected"));
 
@@ -30,7 +30,7 @@ var cookingRouter = require('./routes/cooking');
 var gardeningRouter = require('./routes/gardening');
 var contactRouter = require('./routes/contact');
 var scriptureRouter = require('./routes/scriptures.js')
-var app = express();
+
 
 
 
@@ -47,16 +47,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(session({ secret: 'perilous journey' }));
+// app.use(session({ secret: 'perilous journey' }));
 
 
 // in production never have this set up for cors
 app.use(cors());
 app.use(bodyParser.json());
 
-/* const PORT = process.env.PORT || 5000;
-
-app.listen(PORT, () => console.log(`The server has started on port ${PORT}`)); */
 
 
 

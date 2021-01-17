@@ -100,7 +100,7 @@ router.post("/login", async (req, res) => {
     .status(400)
     .json({ msg: "Invalid credentials." });
     
-    const token = jwt.sign({id: user._id}, process.env.JWT_SECRET);
+    const token = jwt.sign({id: user._id}, process.env.JWT_SECRET); //JWT_SECRET verifies token hasnt been created by someone else.
     res.json({
       token,
       user: {
@@ -124,6 +124,8 @@ try {
 }
 });
 
+
+//used in frontend to verify whether or not someone is logged in
 router.post('/tokenIsValid', async (req, res) => {
   try {
     const token = req.header('x-auth-token');
@@ -142,8 +144,10 @@ router.post('/tokenIsValid', async (req, res) => {
   }
 });
 
+
+//applied authentication to route below as param
 router.get('/', auth, async (req, res) => {
-  const user = await User.findById(req.useer);
+  const user = await User.findById(req.user);
   res.json({
     username: user.username,
     id: user._id,
